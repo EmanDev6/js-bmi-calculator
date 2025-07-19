@@ -1,12 +1,21 @@
-weight = prompt("Enter Your Weight in kg")
-height = prompt("Enter Your Height in meters")
+document.getElementById('calculate-btn').addEventListener('click', calculateBMI);
 
-bmi = weight / (height * height)
-// body mass index (bmi) formula
+function calculateBMI() {
+  const height = parseFloat(document.getElementById('height').value);
+  const weight = parseFloat(document.getElementById('weight').value);
 
-alert("Your BMI is :" + bmi)
+  if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+    document.getElementById('result').textContent = 'Please enter valid height and weight';
+    return;
+  }
 
-document.write("Your BMI is :" + bmi)
-console.log("Your BMI is :" + bmi)
+  const bmi = weight / (height * height);
+  let category;
 
-qqqq
+  if (bmi < 18.5) category = 'Underweight';
+  else if (bmi < 25) category = 'Normal weight';
+  else if (bmi < 30) category = 'Overweight';
+  else category = 'Obese';
+
+  document.getElementById('result').textContent = `BMI: ${bmi.toFixed(2)} (${category})`;
+}
